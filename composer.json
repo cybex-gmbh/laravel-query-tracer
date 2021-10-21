@@ -1,0 +1,63 @@
+{
+    "name": "cybex/laravel-query-tracer",
+    "description": "Add stacktraces to your Model queries.",
+    "homepage": "https://github.com/cybex-gmbh/laravel-query-tracer",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "cybex",
+        "laravel",
+        "database",
+        "debugging",
+        "stacktrace"
+    ],
+    "authors": [
+        {
+            "name": "Oliver Matla",
+            "email": "info@lupinitylabs.com",
+            "homepage": "https://github.com/lupinitylabs",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2.5|^8.0",
+        "ext-pdo": "*",
+        "illuminate/support": "^6.0|^7.0|^8.0"
+    },
+    "require-dev": {
+        "laravel/framework": "^7.0|^8.0",
+        "orchestra/testbench": "^5.0|^6.0",
+        "pestphp/pest": "^1.20",
+        "pestphp/pest-plugin-laravel": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cybex\\QueryTracer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cybex\\QueryTracer\\Tests\\": "tests",
+            "App\\": "vendor/orchestra/testbench-core/laravel/app"
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/pest --no-coverage",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cybex\\QueryTracer\\QueryTracerServiceProvider"
+            ],
+            "aliases": {
+                "Skeleton": "Cybex\\QueryTracer\\QueryTracerFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
