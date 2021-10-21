@@ -174,7 +174,7 @@ class QueryTracerServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('trace.formatter.sourcecode', function () use ($config) {
-            $sourceCodeFormatter = Config::get('query-tracer.trace.sourcecodeFormatter', SourceCodeFormatter::class);
+            $sourceCodeFormatter = Config::get('query-tracer.trace.sourceCodeFormatter', SourceCodeFormatter::class);
 
             $this->guardValidFormatterClass($sourceCodeFormatter, AbstractSourceCodeFormatter::class, 'argument');
 

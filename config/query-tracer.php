@@ -247,7 +247,7 @@ return [
         |
         */
 
-        'sourcecodeFormatter' => SourceCodeFormatter::class,
+        'sourceCodeFormatter' => SourceCodeFormatter::class,
 
         /*
         |--------------------------------------------------------------------------
