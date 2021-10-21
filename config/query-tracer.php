@@ -152,7 +152,7 @@ return [
         | Backtrace Restrictions
         |--------------------------------------------------------------------------
         |
-        | This setting restricts the backtrace to the last file within the
+        | This setting restricts the stack frame selection to files within the
         | application frame.
         |
         | You will usually want to include the app directory as well as the
@@ -170,8 +170,8 @@ return [
         | Backtrace Exclusions
         |--------------------------------------------------------------------------
         |
-        | This setting excludes files containing any of the configured terms in
-        | their name from the backtrace.
+        | This setting controls which files are excluded by specifying terms that
+        | must not appear in the path or file name within the stack frame.
         |
         */
 
