@@ -161,8 +161,8 @@ return [
         */
 
         'includeFilesContaining' => [
-            '/app/',
-            '/storage/',
+            app_path(),
+            storage_path(),
         ],
 
         /*
@@ -175,7 +175,7 @@ return [
         |
         */
 
-        'excludeFilesContaining' => ['/vendor/'],
+        'excludeFilesContaining' => [base_path('vendor')],
 
         /*
         |--------------------------------------------------------------------------
