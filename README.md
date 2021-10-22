@@ -3,7 +3,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/cybex/laravel-query-tracer.svg)](https://packagist.org/packages/cybex/laravel-query-tracer)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/cybex/laravel-query-tracer.svg)](https://packagist.org/packages/cybex/laravel-query-tracer)
-![Github build status](https://github.com/cybex-gmbh/laravel-query-tracer/workflows/tests/badge.svg)
+![Github build status](https://github.com/cybex-gmbh/laravel-query-tracer/actions/workflows/tests.yml/badge.svg)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/cybex-gmbh/laravel-query-tracer.svg)](https://github.com/cybex-gmbh/laravel-query-tracer/pull/)
 [![GitHub issues](https://img.shields.io/github/issues/cybex-gmbh/laravel-query-tracer.svg)](https://github.com/cybex-gmbh/laravel-query-tracer/issues/)
 [![Laravel Version](https://img.shields.io/badge/Minimum_Laravel_Version-6.x-red.svg)](https://laravel.com/docs/6.x)
