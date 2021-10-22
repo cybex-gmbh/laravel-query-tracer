@@ -16,7 +16,7 @@ class Config
 
     public function shouldIncludeSource(): bool
     {
-        return config('query-tracer.trace.includeSource') === true && $this->getSourceLineCount() > 0;
+        return config('query-tracer.trace.includeSource') === true;
     }
 
     public function getCommentTag(): string
@@ -34,9 +34,9 @@ class Config
         return config('query-tracer.trace.sqlComment.lineLength', 80);
     }
 
-    public function getSourceLineCount(): int
+    public function getSourceLinesAround(): int
     {
-        return config('query-tracer.trace.includeSourceLines');
+        return config('query-tracer.trace.sourceLinesAround');
     }
 
     public function getHighlightLineDecoration(): string

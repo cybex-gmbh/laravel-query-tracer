@@ -36,16 +36,16 @@ it('changes the trace key in the query log falling back to trace on existing key
 
 it('includes the source in the query log trace', function () {
     config()->set('query-tracer.trace.includeSource', true);
-    config()->set('query-tracer.trace.includeSourceLines', 8);
+    config()->set('query-tracer.trace.sourceLinesAround', 4);
     config()->set('query-tracer.trace.logArray.values', ['source']);
 
     expectTraceArray()->toHaveKey('source')->containingPerformQuerySourceCode();
 });
 
 
-it('includes the calling line only if includeSourceLines is set to 1', function () {
+it('includes the calling line only if sourceLinesAround is set to 0', function () {
     config()->set('query-tracer.trace.includeSource', true);
-    config()->set('query-tracer.trace.includeSourceLines', 1);
+    config()->set('query-tracer.trace.sourceLinesAround', 0);
     config()->set('query-tracer.trace.logArray.values', ['source']);
 
     expectTraceArray()->toHaveKey('source')->containingPerformQuerySourceCode(true);
@@ -59,14 +59,6 @@ it('includes the source in the query trace', function () {
     config()->set('query-tracer.trace.sqlComment.template', '@source');
 
     expectTraceQuery()->toContainPerformQuerySourceCode();
-});
-
-
-it('does not include source if includeSourceLines is set to 0', function () {
-    config()->set('query-tracer.trace.includeSource', true);
-    config()->set('query-tracer.trace.includeSourceLines', 0);
-
-    expectTraceArray()->not->toHaveKey('source');
 });
 
 

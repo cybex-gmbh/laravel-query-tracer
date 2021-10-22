@@ -234,8 +234,19 @@ return [
         |
         */
 
-        'includeSource'      => true,
-        'includeSourceLines' => 8,
+        'includeSource'     => true,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Number of Source Code Lines Around Target Line
+        |--------------------------------------------------------------------------
+        |
+        | Here you can specify how many lines of source code should be displayed
+        | before and after the target line of the stack frame.
+        |
+        */
+
+        'sourceLinesAround' => 4,
 
         /*
         |--------------------------------------------------------------------------

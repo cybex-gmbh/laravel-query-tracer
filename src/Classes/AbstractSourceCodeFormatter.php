@@ -32,34 +32,37 @@ abstract class AbstractSourceCodeFormatter
      * Retrieves the formatted source code from the specified file around the given line.
      *
      * @param string $fileName
-     * @param int $line
+     * @param int    $line
      *
      * @return string|null
      */
     public function getSourceAt(string $fileName, int $line): ?string
     {
-        if ($this->config->shouldIncludeSource()) {
+        if ($this->config->shouldIncludeSource() && $line > 0) {
             if ($cached = $this->sourceCache[$fileName][$line] ?? false) {
                 return $cached;
             }
 
             $sourceCode = file($fileName);
-            $numSourceLines = $this->config->getSourceLineCount();
-            $startingLine = $line - round($numSourceLines / 2);
 
-            while ($startingLine > 1 && trim($sourceCode[$startingLine - 1] ?? '') === '') {
-                $startingLine--;
-                $numSourceLines++;
+            $sourceLinesAround = $this->config->getSourceLinesAround();
+            $totalLines        = count($sourceCode);
+            $startingLine      = max(1, $line - $sourceLinesAround);
+            $endingLine        = min($totalLines, $line + $sourceLinesAround);
+
+            if ($startingLine <= $endingLine) {
+                $numSourceLines = $endingLine - $startingLine + 1;
+                $lineCounter    = $startingLine;
+
+                $codeSlice = collect(array_slice($sourceCode, $startingLine - 1, $numSourceLines))
+                    ->mapWithKeys(
+                        function ($line) use (&$lineCounter) {
+                            return [$lineCounter++ => $line];
+                        }
+                    );
+
+                return $this->sourceCache[$fileName][$line] = $this->getFormattedCode($codeSlice, $line);
             }
-
-            $lineCounter = $startingLine;
-            $codeSlice   = collect(array_slice($sourceCode, $startingLine, $numSourceLines))->mapWithKeys(
-                function ($line) use (&$lineCounter) {
-                    return [++$lineCounter => $line];
-                }
-            );
-
-            return $this->sourceCache[$fileName][$line] = $this->getFormattedCode($codeSlice, $line);
         }
 
         return null;
@@ -70,7 +73,7 @@ abstract class AbstractSourceCodeFormatter
      * Formats the source code listing to include in the trace.
      *
      * @param Collection $code
-     * @param int $highlightedLine
+     * @param int        $highlightedLine
      *
      * @return string
      */
@@ -123,8 +126,8 @@ abstract class AbstractSourceCodeFormatter
      * Formats the given line according to the maximum line length.
      *
      * @param string $line
-     * @param bool $trim
-     * @param bool $highlightSpaces
+     * @param bool   $trim
+     * @param bool   $highlightSpaces
      *
      * @return string
      */
@@ -145,7 +148,7 @@ abstract class AbstractSourceCodeFormatter
      * Adds line numbers to the given code lines.
      *
      * @param Collection $code
-     * @param int $highlightedLine
+     * @param int        $highlightedLine
      *
      * @return mixed
      */
