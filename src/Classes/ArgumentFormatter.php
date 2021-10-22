@@ -19,6 +19,8 @@ class ArgumentFormatter implements ArgumentFormatterInterface
         switch (gettype($argument)) {
             case 'string':
                 return sprintf("'%s'", $argument);
+            case 'boolean':
+                return $argument ? 'true' : 'false';
             case 'integer':
             case 'double':
                 return $argument;
