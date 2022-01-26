@@ -91,7 +91,7 @@ class StackTrace
 
         $fullBacktrace = debug_backtrace(
             config('query-tracer.backtrace.withArgs') ? 1 : DEBUG_BACKTRACE_IGNORE_ARGS,
-            config('query-tracer.backtrace.limit')
+            config('query-tracer.backtrace.limit') ?? 0
         );
 
         $stackFrameIterator = new ArrayIterator($fullBacktrace);
