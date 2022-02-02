@@ -90,8 +90,8 @@ class StackTrace
         $excludeContaining = (array)config('query-tracer.backtrace.excludeFilesContaining');
 
         $fullBacktrace = debug_backtrace(
-            config('query-tracer.backtrace.withArgs') ? 1 : DEBUG_BACKTRACE_IGNORE_ARGS,
-            config('query-tracer.backtrace.limit') ?? 0
+            DEBUG_BACKTRACE_PROVIDE_OBJECT | (config('query-tracer.backtrace.withArgs') ? false : DEBUG_BACKTRACE_IGNORE_ARGS),
+            config('query-tracer.backtrace.limit')
         );
 
         $stackFrameIterator = new ArrayIterator($fullBacktrace);
