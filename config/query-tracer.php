@@ -124,14 +124,14 @@ return [
         | Backtrace Frame Limit
         |--------------------------------------------------------------------------
         |
-        | Setting this limit to any non-null value greater than 0 will limit the
-        | amount of stack frames to parse. Depending on the application and your
-        | restriction settings, a good value might be between 8 and 25. If in
-        | doubt, leave this setting unlimited as long as you don't experience
-        | serious performance or memory consumption issues.
+        | Setting this limit to any value greater than 0 will limit the amount
+        | of stack frames to parse. Depending on the application and your
+        | restriction settings, a good value might be between 8 and 25.
+        | If in doubt, leave this setting unlimited as long as you do
+        | not experience performance or memory consumption issues.
         |
         */
-        'limit' => null,
+        'limit' => 0,
 
         /*
         |--------------------------------------------------------------------------
