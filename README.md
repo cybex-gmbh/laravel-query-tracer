@@ -33,7 +33,7 @@ composer require cybex/laravel-query-tracer
 To activate the Query Tracer, just add the following line to your `.env` file:
 
 ```
-ENABLE_QUERY_TRACER=true
+QUERY_TRACER_ENABLED=true
 ```
 
 Once you have done this, all Model queries will contain a comment with useful information to locate the source of the
