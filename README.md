@@ -234,15 +234,8 @@ composer test
 
 ## Requirements
 
-- PHP: (7.2*), 7.3, 7.4, 8.0, 8.1
-- Laravel: 6*, 7, 8
-
-> (*) **PLEASE NOTE:** While we tried to make sure that Laravel Query Tracer will run on PHP 7.2 and Laravel 6, its compatibility is ***not guaranteed***.
->
->
-> **We are only actively testing for PHP 7.3+ and Laravel 7+. Use at your own risk.**
->
-> We are using [Pest](https://github.com/pestphp/pest) for testing, which neither supports PHP 7.2 nor Laravel 6.
+- PHP: 7.3, 7.4, 8.0, 8.1
+- Laravel: 7, 8, 9
 
 ## Changelog
 
