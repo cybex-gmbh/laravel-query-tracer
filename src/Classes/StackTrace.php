@@ -135,7 +135,7 @@ class StackTrace
 
         $args = '';
 
-        if (is_array($stackFrame['args']) && count($stackFrame['args'])) {
+        if (is_array($stackFrame['args'] ?? false) && count($stackFrame['args'])) {
             $args = app('trace.formatter.argument')->formatStackFrameArguments(array_values($stackFrame['args']));
         }
 
