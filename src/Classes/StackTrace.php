@@ -90,7 +90,7 @@ class StackTrace
         $excludeContaining = (array)config('query-tracer.backtrace.excludeFilesContaining');
 
         $fullBacktrace = debug_backtrace(
-            config('query-tracer.backtrace.withArgs') ? 1 : DEBUG_BACKTRACE_IGNORE_ARGS,
+            DEBUG_BACKTRACE_PROVIDE_OBJECT | (config('query-tracer.backtrace.withArgs') ? false : DEBUG_BACKTRACE_IGNORE_ARGS),
             config('query-tracer.backtrace.limit')
         );
 
@@ -135,7 +135,7 @@ class StackTrace
 
         $args = '';
 
-        if (is_array($stackFrame['args']) && count($stackFrame['args'])) {
+        if (is_array($stackFrame['args'] ?? false) && count($stackFrame['args'])) {
             $args = app('trace.formatter.argument')->formatStackFrameArguments(array_values($stackFrame['args']));
         }
 

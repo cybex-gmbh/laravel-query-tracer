@@ -11,15 +11,12 @@ use Cybex\QueryTracer\Classes\SourceCodeFormatter;
 use Cybex\QueryTracer\Classes\SqlCommentFormatter;
 use Cybex\QueryTracer\Interfaces\ArgumentFormatterInterface;
 use Cybex\QueryTracer\Scopes\QueryTracerScope;
-use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 use InvalidArgumentException;
-use ReflectionClass;
 
 class QueryTracerServiceProvider extends ServiceProvider
 {
@@ -73,40 +70,11 @@ class QueryTracerServiceProvider extends ServiceProvider
      */
     protected function registerScopeOnAllModels(): void
     {
-        $this->getAllModels()
-            ->each(function ($model) {
+        Event::listen(['eloquent.booted: *'], function ($event, $arguments) {
+            if (($model = Arr::first($arguments)) instanceof Model) {
                 $model::addGlobalScope(new QueryTracerScope());
-            });
-    }
-
-    /**
-     * Returns a Collection of all available Models via the Filesystem.
-     *
-     * @param bool $withoutAbstract if true, do not include abstract classes in the Collection.
-     * @param bool $withoutLeadingBackslash if true, the namespaces will not be prefixed by a backslash (what SomeClass::class would return).
-     *
-     * @return Collection
-     */
-    protected function getAllModels(bool $withoutAbstract = true, bool $withoutLeadingBackslash = false): Collection
-    {
-        $appNamespace = Container::getInstance()->getNamespace();
-        $modelNamespace = config('query-tracer.model-namespace', '');
-
-        return collect(
-            File::allFiles(app_path(str_replace('\\', DIRECTORY_SEPARATOR, $modelNamespace)))
-        )->map(
-            function ($item) use ($appNamespace, $modelNamespace, $withoutAbstract, $withoutLeadingBackslash) {
-                $class = sprintf(
-                    ($withoutLeadingBackslash ? '' : '\\') . '%s%s%s',
-                    $appNamespace,
-                    $modelNamespace ? $modelNamespace . '\\' : '',
-                    implode('\\', explode('/', Str::beforeLast($item->getRelativePathname(), '.')))
-                );
-
-                return class_exists($class) && is_subclass_of($class, Model::class) &&
-                ($withoutAbstract === false || (new ReflectionClass($class))->isAbstract() === false) ? $class : null;
             }
-        )->filter();
+        });
     }
 
     /**

@@ -3,10 +3,10 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/cybex/laravel-query-tracer.svg)](https://packagist.org/packages/cybex/laravel-query-tracer)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/cybex/laravel-query-tracer.svg)](https://packagist.org/packages/cybex/laravel-query-tracer)
-![Github build status](https://github.com/cybex-gmbh/laravel-query-tracer/workflows/tests/badge.svg)
+![Github build status](https://github.com/cybex-gmbh/laravel-query-tracer/actions/workflows/tests.yml/badge.svg)
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/cybex-gmbh/laravel-query-tracer.svg)](https://github.com/cybex-gmbh/laravel-query-tracer/pull/)
 [![GitHub issues](https://img.shields.io/github/issues/cybex-gmbh/laravel-query-tracer.svg)](https://github.com/cybex-gmbh/laravel-query-tracer/issues/)
-[![Laravel Version](https://img.shields.io/badge/Minimum_Laravel_Version-6.x-red.svg)](https://laravel.com/docs/6.x)
+[![Laravel Version](https://img.shields.io/badge/Minimum_Laravel_Version-7.x-red.svg)](https://laravel.com/docs/7.x)
 
 ![Sample Query with Trace](media/query.png)
 
@@ -33,7 +33,7 @@ composer require cybex/laravel-query-tracer
 To activate the Query Tracer, just add the following line to your `.env` file:
 
 ```
-ENABLE_QUERY_TRACER=true
+QUERY_TRACER_ENABLED=true
 ```
 
 Once you have done this, all Model queries will contain a comment with useful information to locate the source of the
@@ -234,15 +234,8 @@ composer test
 
 ## Requirements
 
-- PHP: (7.2*), 7.3, 7.4, 8.0, 8.1
-- Laravel: 6*, 7, 8
-
-> (*) **PLEASE NOTE:** While we tried to make sure that Laravel Query Tracer will run on PHP 7.2 and Laravel 6, its compatibility is ***not guaranteed***.
->
->
-> **We are only actively testing for PHP 7.3+ and Laravel 7+. Use at your own risk.**
->
-> We are using [Pest](https://github.com/pestphp/pest) for testing, which neither supports PHP 7.2 nor Laravel 6.
+- PHP: 7.3, 7.4, 8.0, 8.1
+- Laravel: 7, 8, 9
 
 ## Changelog
 
